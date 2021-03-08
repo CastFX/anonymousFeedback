@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+Auth::routes([
+//    'register' => false,
+    'reset' => false,
+    'verify' => false,
+]);
+
+Route::get('/', [App\Http\Controllers\Views\HomeController::class, 'index'])->name('home.index');
+Route::get('/feedback/list', [App\Http\Controllers\FeedbackController::class, 'index'])->name('feedback.list');
+Route::get('/feedback/create', [App\Http\Controllers\FeedbackController::class, 'create'])->name('feedback.create');
+Route::get('/feedback', [App\Http\Controllers\FeedbackController::class, 'index'])->name('feedback.index');
+Route::post('/feedback', [App\Http\Controllers\FeedbackController::class, 'store'])->name('feedback.store');

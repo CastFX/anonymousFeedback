@@ -1,0 +1,215 @@
+swagger: "2.0"
+info:
+  description: "This is the API for anonymous feedback"
+  version: "1.0.0"
+  title: "Anonymous feedback"
+  contact:
+    email: "christian.serra20@gmail.com"
+host: "feedback.corsi.it"
+basePath: "/"
+tags:
+- name: "feedback"
+  description: "Anonymous feedback"
+- name: "user"
+  description: "Operations about user"
+schemes:
+- "https"
+- "http"
+paths:
+  /:
+    get:
+      tags:
+      - "home"
+      summary: "Shows the homepage with the happiness index and the top 5 reviewed employess"
+      description: ""
+      responses:
+        "200":
+          description: "successful operation"
+  /feedback/create:
+    get:
+      tags:
+      - "feedback"
+      summary: "Shows the create feedback page"
+      description: ""
+      responses:
+        "200":
+          description: "successful operation"
+        "401":
+          description: "Unauthorized, need to be logged in to get the whole feedback list"
+          
+  /feedback/list:
+    get:
+      tags:
+      - "feedback"
+      summary: "Shows the feedback list page"
+      description: ""
+      responses:
+        "200":
+          description: "successful operation"
+        "401":
+          description: "Unauthorized, need to be logged in to get the whole feedback list"
+    
+  /feedback:
+    get:
+      tags:
+      - "feedback"
+      summary: "Retrieves an array of all the feedback left"
+      description: ""
+      responses:
+        "200":
+          description: "successful operation"
+          schema: 
+            $ref: "#/definitions/Feedback"
+        "401":
+          description: "Unauthorized, need to be logged in to get the whole feedback list"
+    post:
+      tags:
+      - "feedback"
+      summary: "Add a new anonymous feedback"
+      description: ""
+      operationId: "addPet"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Pet object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/Feedback"
+      responses:
+        "200":
+          description: "successful operation"
+          schema: 
+            $ref: "#/definitions/Feedback"
+        "401":
+          description: "Unauthorized, need to be logged in to get the whole feedback list"
+        "405":
+          description: "Invalid input"
+
+  
+  /feedback/{feedbackId}:
+    get:
+      tags:
+      - "feedback"
+      summary: "Find a feedback by ID"
+      description: "Returns a single feedback"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "feedbackId"
+        in: "path"
+        description: "ID of feedback to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Feedback"
+        "401":
+          description: "Unauthorized, need to be logged in to get the whole feedback list"
+        "404":
+          description: "Feedback not found"
+
+  /login:
+    get:
+      tags:
+      - "user"
+      summary: "Shows the login page"
+      description: ""
+      responses:
+        "200":
+          description: "successful operation"
+    post:
+      tags:
+      - "user"
+      summary: "Logs user into the system"
+      description: ""
+      operationId: "loginUser"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "email"
+        in: "query"
+        description: "The email for the login"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "query"
+        description: "The password for login in clear text"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+        "400":
+          description: "Invalid username/password supplied"
+  /logout:
+    post:
+      tags:
+      - "user"
+      summary: "Logs out current logged in user session"
+      description: ""
+      operationId: "logoutUser"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters: []
+      responses:
+        default:
+          description: "successful operation"
+
+definitions:
+  Feedback:
+    type: "object"
+    required:
+    - "stars"
+    - "user_id"
+    - "timestamp"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      user_id:
+        type: "integer"
+        format: "int64"
+      stars:
+        type: "integer"
+      description:
+        type: "string"
+      timestamp:
+        type: "integer"
+  
+    xml:
+      name: "Feedback"
+  User:
+    type: "object"
+    required:
+    - "email"
+    - "password"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+    xml:
+      name: "User"
+
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
