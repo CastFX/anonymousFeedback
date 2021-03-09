@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d913e52c-01cf-4560-9022-96df67ee6b6c" name="Default Changelist" comment="third part finished">
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+    <list default="true" id="d913e52c-01cf-4560-9022-96df67ee6b6c" name="Default Changelist" comment="fixed .env.example">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FeedbackController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FeedbackController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +197,7 @@
       <workItem from="1615046113851" duration="1142000" />
       <workItem from="1615047276278" duration="31431000" />
       <workItem from="1615266457034" duration="7081000" />
-      <workItem from="1615277902584" duration="15812000" />
+      <workItem from="1615277902584" duration="16580000" />
     </task>
     <task id="LOCAL-00001" summary="initial api">
       <created>1615219121613</created>
@@ -220,7 +220,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615294148010</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="fixed .env.example">
+      <created>1615294618168</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1615294618168</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,7 +252,8 @@
     <MESSAGE value="initial api" />
     <MESSAGE value="first part finished, without modal" />
     <MESSAGE value="third part finished" />
-    <option name="LAST_COMMIT_MESSAGE" value="third part finished" />
+    <MESSAGE value="fixed .env.example" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed .env.example" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

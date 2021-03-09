@@ -13,7 +13,11 @@ Generate the Application Key
 
 `php artisan key:generate`
 
-To populate the db with fake data
+To populate the db with fake data, first you need to create the sqlite db
+
+`touch database/database.sqlite`
+
+Then run the migrations
 
 `php artisan migrate:fresh --seed`
 

@@ -29,7 +29,7 @@ class FeedbackController extends Controller
      */
     public function index()
     {
-        return Feedback::all();
+        return Feedback::orderBy('created_at', 'DESC')->get();
     }
 
     public function create()
@@ -67,6 +67,6 @@ class FeedbackController extends Controller
 
     public function show($user)
     {
-        return User::findOrFail($user)->feedbacks;
+        return User::findOrFail($user)->feedbacks()->orderBy('created_at', 'DESC')->get();
     }
 }
