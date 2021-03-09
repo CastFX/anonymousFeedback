@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Views;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {

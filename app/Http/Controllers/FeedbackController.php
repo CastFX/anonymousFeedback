@@ -24,45 +24,41 @@ class FeedbackController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return Renderable
+     * @return Feedback[]|Renderable|\Illuminate\Database\Eloquent\Collection
      */
     public function index()
     {
-        //todo return json of all feedbacks
-        return view('leaveFeedback');
+        return Feedback::all();
     }
 
     public function create()
     {
-        //todo get users
-//        $users = auth()->user()->following()->pluck('profiles.user_id');
-        return view('feedback.create', compact('users'));
+        $emails = auth()->user()->pluck('email', 'id');
+        return view('feedback.create', compact('emails'));
     }
 
     public function store()
     {
         $data = request()->validate([
-            'email' => 'required|email',
+            'email' => 'required|email|exists:users,email',
             'rating' => 'required',
-            'description' => 'required'
+            'description' => 'nullable|string'
         ]);
 
-        $email = $data['email'];
-        $user = DB::table('users')->where('email', $email)->first();
+        $user = User::where('email', $data['email'])->first();
 
-
-        //todo create feedback in db
-        auth()->feedbacks()->create([
+        $user->feedbacks()->create([
             'email' => $data['email'],
             'rating' => $data['rating'],
             'description' => $data['description']
         ]);
 
-        //todo return answer to show modal
-        return redirect('/profile/' . auth()->user()->id);
+        $success = (object) ["name" => $user->name];
+        $emails = auth()->user()->pluck('email', 'id');
+        return redirect()->back()->with(compact("success", "emails"));
     }
 
-    public function showFeedbackList()
+    public function list()
     {
         $feedbacks = auth()->feedbacks();
         return view('feedback.list', compact('feedbacks'));
