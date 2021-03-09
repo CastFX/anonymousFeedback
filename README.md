@@ -5,6 +5,10 @@ Install php dependencies
 
 `composer install`
 
+create .env from .env.backup
+
+`cp .env.example .env`
+
 Generate the Application Key
 
 `php artisan key:generate`
