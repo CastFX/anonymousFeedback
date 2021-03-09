@@ -18,10 +18,10 @@ window.axios = require('axios');
  * Eg. ./components/ModalComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+const files = require.context('./', true, /\.vue$/i)
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('feedback-list', require('./components/FeedbackList.vue').default);
+// Vue.component('feedback-list', require('./components/FeedbackList.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

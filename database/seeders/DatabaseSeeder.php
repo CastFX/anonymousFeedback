@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Feedback;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,7 +21,7 @@ class DatabaseSeeder extends Seeder
             ->create()
             ->each(function ($user) {
                 $feedbacks = Feedback::factory()
-                    ->count(4)
+                    ->count(11)
                     ->make();
 
                 foreach($feedbacks as $feedback) {
@@ -30,5 +31,10 @@ class DatabaseSeeder extends Seeder
                     $user->feedbacks()->save($feedback);
                 }
             });
+
+        $defaultUser = User::factory()->make();
+        $defaultUser->name = "tester";
+        $defaultUser->email = "test@test.com";
+        $defaultUser->save();
     }
 }

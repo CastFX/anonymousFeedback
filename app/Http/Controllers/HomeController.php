@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Feedback;
 use Illuminate\Contracts\Support\Renderable;
 
 class HomeController extends Controller
@@ -23,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        $feedbacks = Feedback::all('created_at', 'rating', 'email', 'name');
+        $numberOfRankings = 5;
+        return view('home', compact('feedbacks', 'numberOfRankings'));
     }
 }
