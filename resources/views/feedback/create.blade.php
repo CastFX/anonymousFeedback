@@ -2,6 +2,10 @@
 
 @section('content')
     <div class="container">
+        <div class="row pb-4 justify-content-center">
+            <h2>Leave an anonymous feedback</h2>
+        </div>
+
         <form action="/feedback" method="POST">
             @csrf
 
@@ -23,11 +27,11 @@
                 @endif
             </div>
             <div class="from-group row justify-content-center">
-                <label for="exampleDataList" class="form-label">Select an email</label>
-                <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search for an email" name="email">
+                <label for="emailDatalist" class="form-label">Select an email</label>
+                <input class="form-control" autocomplete="off" list="datalistOptions" id="emailDatalist" placeholder="Type to search for an email" name="email">
                 <datalist id="datalistOptions">
-                    @foreach ($emails as $id => $email)
-                        <option id= {{$id}} value="{{$email}}">
+                    @foreach ($emails as $email)
+                        <option value="{{$email}}">
                     @endforeach
                 </datalist>
             </div>
@@ -65,6 +69,4 @@
             </div>
         </form>
     </div>
-
-
 @endsection

@@ -23,10 +23,11 @@ class FeedbackFactory extends Factory
      */
     public function definition()
     {
+
         return [
             'rating' => $this->faker->numberBetween($min = 0, $max = 5),
-            'email' => $this->faker->unique()->safeEmail,
             'description' => $this->faker->text,
+            'created_at' => $this->faker->dateTimeBetween('-30 days')
         ];
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Feedback;
 use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,7 +25,7 @@ class FeedbackController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return Feedback[]|Renderable|\Illuminate\Database\Eloquent\Collection
+     * @return Feedback[]|Renderable|Collection
      */
     public function index()
     {
@@ -33,7 +34,7 @@ class FeedbackController extends Controller
 
     public function create()
     {
-        $emails = auth()->user()->pluck('email', 'id');
+        $emails = auth()->user()->pluck('email');
         return view('feedback.create', compact('emails'));
     }
 
@@ -54,13 +55,18 @@ class FeedbackController extends Controller
         ]);
 
         $success = (object) ["name" => $user->name];
-        $emails = auth()->user()->pluck('email', 'id');
+        $emails = auth()->user()->pluck('email');
         return redirect()->back()->with(compact("success", "emails"));
     }
 
     public function list()
     {
-        $feedbacks = auth()->feedbacks();
-        return view('feedback.list', compact('feedbacks'));
+        $emails = auth()->user()->pluck('email', 'id');
+        return view('feedback.list', compact('emails'));
+    }
+
+    public function show($user)
+    {
+        return User::findOrFail($user)->feedbacks;
     }
 }

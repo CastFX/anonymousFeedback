@@ -25,7 +25,8 @@ Auth::routes([
 ]);
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
-Route::get('/feedback/list', [App\Http\Controllers\FeedbackController::class, 'index'])->name('feedback.list');
+Route::get('/feedback/list', [App\Http\Controllers\FeedbackController::class, 'list'])->name('feedback.list');
 Route::get('/feedback/create', [App\Http\Controllers\FeedbackController::class, 'create'])->name('feedback.create');
 Route::get('/feedback', [App\Http\Controllers\FeedbackController::class, 'index'])->name('feedback.index');
 Route::post('/feedback', [App\Http\Controllers\FeedbackController::class, 'store'])->name('feedback.store');
+Route::get('/feedback/{user_id}', [App\Http\Controllers\FeedbackController::class, 'show'])->name('feedback.show');
